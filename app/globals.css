@@ -1118,6 +1118,10 @@ main {
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
+  color: var(--brown-dark);
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .calendar-head h5 {
   font-size: 1.25rem;
@@ -1166,6 +1170,11 @@ main {
   transition: all 0.2s ease;
   font-family: "Barlow", sans-serif;
   font-size: 15px;
+  /* iOS/Safari: senza color esplicito il testo dei button nel form diventa blu di sistema */
+  color: var(--brown-dark);
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .calendar-grid button:hover {
   border-color: var(--accent);
@@ -1200,6 +1209,10 @@ main {
   cursor: pointer;
   font-family: "Barlow", sans-serif;
   transition: all 0.2s ease;
+  color: var(--brown-dark);
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .service-tabs button.active {
   background: var(--brown-dark);
@@ -1218,6 +1231,10 @@ main {
   cursor: pointer;
   font-family: "Barlow", sans-serif;
   transition: all 0.2s ease;
+  color: var(--brown-dark);
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .time-slots button.active {
   background: #000;
@@ -1429,6 +1446,21 @@ main {
 .whatsapp-floating i {
   font-size: 1.45rem;
   line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .whatsapp-floating {
+    right: 12px;
+    bottom: 14px;
+    padding: 7px 11px;
+    gap: 5px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .whatsapp-floating i {
+    font-size: 1.05rem;
+  }
 }
 
 .lang-switcher--header {

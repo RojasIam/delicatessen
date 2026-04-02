@@ -674,9 +674,9 @@ Richieste speciali: ${richieste}`;
         </div>
       </footer>
 
-      <a className="whatsapp-floating" href="/#prenota" aria-label="Prenotazioni — apri il calendario">
+      <a className="whatsapp-floating" href="/#prenota" aria-label="Prenota — apri il calendario">
         <i className="fa-brands fa-whatsapp" aria-hidden />
-        Prenotazioni
+        Prenota
       </a>
 
       {bookingModalOpen ? (

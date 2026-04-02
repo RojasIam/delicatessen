@@ -192,10 +192,10 @@ export function ShopChrome({ children }: { children: ReactNode }) {
       <a
         className="whatsapp-floating"
         href="/#prenota"
-        aria-label="Prenotazioni — apri il calendario"
+        aria-label="Prenota — apri il calendario"
       >
         <i className="fa-brands fa-whatsapp" aria-hidden />
-        Prenotazioni
+        Prenota
       </a>
     </>
   );
