@@ -464,7 +464,7 @@ Richieste speciali: ${richieste}`;
                 <div className="promo-split-text">
                   <h4>PRANZO DI PASQUA</h4>
                   <p className="pasqua-promo-desc">
-                    🥨🐇 ANCHE QUEST&apos;ANNO SAREMO
+                    ANCHE QUEST&apos;ANNO SAREMO
                     <br />
                     LIETI DI OSPITARVI PER IL PRANZO DI
                     <br />
