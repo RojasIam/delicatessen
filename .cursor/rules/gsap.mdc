@@ -1,0 +1,46 @@
+---
+description: GSAP animations — official patterns from greensock/gsap-skills; use for React/Next.js in this project.
+globs: "**/*.tsx,**/page.tsx,**/layout.tsx,**/components/**/*.tsx"
+---
+
+# GSAP en este proyecto (Delicatessen / Next.js)
+
+Fuente oficial de referencia: [greensock/gsap-skills](https://github.com/greensock/gsap-skills) (skills MIT). En este repo ya están instalados `gsap` y `@gsap/react`; **`GsapProvider`** en `app/gsap-provider.tsx` registra `useGSAP` y `ScrollTrigger` en el cliente (montado desde `app/layout.tsx`).
+
+## Next.js / React (obligatorio)
+
+- GSAP solo en **cliente**: `useGSAP` de `@gsap/react` o `useEffect` / `useLayoutEffect`. **No** llamar `gsap.*` ni `ScrollTrigger.*` durante SSR.
+- Registrar plugins una vez: `gsap.registerPlugin(ScrollTrigger, useGSAP)` (según lo que uses).
+- **Siempre** acotar selectores con **`scope: containerRef`** en `useGSAP`, o usar `gsap.context(() => { ... }, scopeRef)` y en cleanup **`return () => ctx.revert()`**.
+- Preferir **refs** a nodos concretos; evitar `.querySelector` global sin scope.
+- En callbacks que se ejecutan **después** del hook (p. ej. `click`), usar **`contextSafe`** de `useGSAP` para tweens creados ahí, o limpiar listeners + `kill()` manualmente.
+- Con dependencias que deben re-ejecutar la animación: `useGSAP(..., { dependencies: [...], scope, revertOnUpdate: true })`.
+
+## Core API (resumen)
+
+- Preferir **`gsap.to` / `from` / `fromTo`**; propiedades en **camelCase**.
+- Animar **`x`, `y`, `scale`, `rotation`** (alias de transform) en lugar del string `transform` completo.
+- Usar **`autoAlpha`** en lugar de solo `opacity` cuando a 0 el elemento no deba recibir clicks (`visibility` gestionada por GSAP).
+- Encadenar pasos con **`gsap.timeline()`**, no con muchos `delay` encadenados.
+- **Stagger** en listas: `stagger: 0.1` u objeto `{ each, from }`.
+- Easings documentados: `power2.out`, `power3.inOut`, `back.out(1.7)`, etc.
+
+## ScrollTrigger
+
+- `gsap.registerPlugin(ScrollTrigger)` una vez.
+- Tras cambios de layout (resize, fuentes, imágenes): **`ScrollTrigger.refresh()`** cuando corresponda.
+- Limpiar: van dentro del mismo `context` / `useGSAP` para revertir con el componente.
+
+## Accesibilidad y responsive
+
+- Usar **`gsap.matchMedia()`** para breakpoints y para **`(prefers-reduced-motion: reduce)`**: `duration: 0` o animación mínima cuando el usuario pide menos movimiento.
+
+## Rendimiento
+
+- Evitar animar layout (`width`, `height`, `top`, `left`) si el mismo efecto vale con **transform** (`x`, `y`, `scale`).
+
+## No hacer
+
+- Selectores GSAP **sin `scope`** en componentes reutilizables.
+- Olvidar **`ctx.revert()`** o equivalente al desmontar.
+- Ejecutar GSAP en el servidor o en módulos que corran en import SSR sin guardas.
